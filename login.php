@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +7,13 @@
   <title>Log In</title>
 </head>
 <body>
-  
-  
-
-
   <div class="main-wrapper">
       <div class="container">
           <div class="main-area">
             <div class="imgBox"><img src="imgs/login.jpg" alt=""></div>
             <div class="formBox">
                 <form  method='' action="" class=' Flog'>
-                <h2 class='login-title'>Aoi's MakeUp gallary</h2>
+                <h2 class='login-title'>Aois MakeUp gallary</h2>
                 <input type="text" name="name" placeholder='UserName' class='login Fin '>
                 <input type="password" name="password"  Placeholder='Password' class='login Fin '>
                 <input type="submit" name="password"  value='Sigh Up' class='login Fin Lcolor'>
@@ -31,9 +23,8 @@
           </div>
       </div>
    </div>
-</body>
-</html>
-
 <?php 
 include('footer.php');
 ?>
+</body>
+</html>

@@ -16,9 +16,6 @@
 
 ?>
 
-<?php 
-include('header.php');
-?>
 
 
 
@@ -34,6 +31,10 @@ include('header.php');
 
 </head>
 <body>
+
+<?php 
+include('header.php');
+?>
   <div class='contact-header'>
       <div class="container">
           <div class="contact-header-area">
@@ -74,9 +75,9 @@ include('header.php');
 
 
 
-</body>
-</html>
-
-<?php 
+   <?php 
 include('footer.php');
 ?>
+
+</body>
+</html>

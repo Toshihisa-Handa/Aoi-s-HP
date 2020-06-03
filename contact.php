@@ -1,6 +1,3 @@
-<?php 
-include('header.php');
-?>
 
 
 
@@ -16,6 +13,10 @@ include('header.php');
 
 </head>
 <body>
+<?php 
+include('header.php');
+?>
+
   <div class='contact-header'>
       <div class="container">
           <div class="contact-header-area">
@@ -27,7 +28,7 @@ include('header.php');
   <div class="form-wrapper">
       <div class="container">
           <div class="form-area">
-            <form action="contactw.php"  method='post'>
+            <form action="contactW.php"  method='post'>
             <div class='formBox'>
                 <input type="text" name="name" placeholder='Name' class='formNav in'>
                 <input type="text" name="mail"  Placeholder='Email' class='formNav in'>
@@ -49,9 +50,9 @@ include('header.php');
 
 
 
-</body>
-</html>
-
-<?php 
+   <?php 
 include('footer.php');
 ?>
+
+</body>
+</html>

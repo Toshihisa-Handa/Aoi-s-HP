@@ -1,8 +1,4 @@
 
-<?php 
-include('header.php');
-?>
-
 
 
 
@@ -17,6 +13,11 @@ include('header.php');
 
 </head>
 <body>
+
+<?php 
+include('header.php');
+?>
+
   <div class='contact-header'>
       <div class="container">
           <div class="contact-header-area">
@@ -86,9 +87,9 @@ include('header.php');
 
 
 
+   <?php 
+include('footer.php');
+?>
 </body>
 </html>
 
-<?php 
-include('footer.php');
-?>
