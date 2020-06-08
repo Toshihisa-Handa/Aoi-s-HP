@@ -2,9 +2,16 @@
 session_start();
 include('funcs.php');//別の階層にfuncs.phpがある場合は「betukaisou/funcs.php」などパスを変えてincludesする
 loginCheck();
+//select2.phpをコピペでスタート
 
 
-//1. DB接続します
+//1.GETでidを取得
+$id =$_GET['id'];
+// echo $id;
+// exit;
+
+
+//2. DB接続します(ここコピペでOK。select2.phpの時と記載同じ)
 try {
   //localhostの時はこれ。さくらの場合さくらのデータベースをいれる
   //Password:MAMP='root',XAMPP=''
@@ -14,49 +21,27 @@ try {
 }
 
 
-//2．データ登録SQL作成
+//3．データ登録SQL作成(今回はselect2.phpの一覧表示から1行だけ取り出す記述をする)
 //prepare("")の中にはmysqlのSQLで入力したINSERT文を入れて修正すれば良いイメージ
-$stmt = $pdo->prepare("SELECT* FROM aoi_hp_contact");
+$sql = "SELECT * FROM aoi_hp_contact WHERE id=:id";//この1行select2.phpから修正
+$stmt = $pdo->prepare($sql);//select2.phpで元々あった()内の記述を修正し、変数sqlへ格納したものを（）内に記述
+$stmt->bindValue('id', $id, PDO::PARAM_INT);//ここの記述はselect2.phpにない部分！
 $status = $stmt->execute();
 
 
-//3．データ登録処理後（基本コピペ使用でOK)
-$viewDate='';
-$viewName='';
-$viewEmail='';
-$viewMessage='';
+//4．データ登録処理後（elseより手前はselect2.phpと同じ）
 $view='';
 if($status==false){
   //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
   $error = $stmt->errorInfo();
   exit("SQLError:".$error[2]);//エラーが起きたらエラーの2番目の配列から取ります。ここは考えず、これを使えばOK
                              // SQLEErrorの部分はエラー時出てくる文なのでなんでもOK
-}else{
- //selectデータの数だけ自動でループしてくれる
-
-  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){
-    //  $view.='<p>'.$r['id'].$r['name'].$r['author'].$r['kan'].$r['kansou'].$r['indate'].'</p>';
-  
-    //更新用リンクを埋め込んだ表示コード(元のselect.phpから修正する箇所)
-    $view .='<p class="contactBox">'.'Date : '.$r['indate'];
-    //以下はupdateのリンクタグの記述
-    $view .='  ';
-    $view .='<a class="contactLink" href="U_view.php? id='.$r["id"].'">';
-    $view .='[Update]';
-    $view .='</a>';
-    //以下はdeleteのリンクタグの記述
-    $view .='  ';
-    $view .='<a class="contactLink" href="delete.php? id='.$r["id"].'">';
-    $view .='[Delete]';
-    $view .='</a>'.'<br>';
-    $view .='Name : '.$r['name'].'<br>';
-    $view .='Email : '.$r['email'].'<br>';
-    $view .='Message : '.'<br>'.$r['message'];  
-    $view .='</p>';
-   }
-
-
+}else{//ここより下は修正している↓
+ //1データのみ抽出の為,select2.phpであったwhile文を削除。ここで$rowを定義
+$row = $stmt->fetch();
 }
+
+//以下のhtmlタグ内の記述は見た目のレイアウトを合わせると良いため、基本index2.phpをコピペする。
 ?>
 
 
@@ -71,40 +56,35 @@ if($status==false){
 
 </head>
 <body>
-
 <?php 
 include('header.php');
 ?>
+
   <div class='contact-header'>
       <div class="container">
           <div class="contact-header-area">
-          <div class=><img src="imgs/contact.jpg" class="tama"></div>          
+        <div class=><img src="imgs/contact.jpg" class="tama"></div>          
           </div>
       </div>
-  </div>
-<!-- 結果の表示 -->
-  <div class="main-wrapper">
-    <div class="container">
-      <div class="main-area">
-        <h2>Send your Message</h2>
-      </div>
-    </div>
   </div>
 
   <div class="form-wrapper">
       <div class="container">
           <div class="form-area">
-            <form class='answerBox' action="contactw.php"  method='post'>
+            <form action="update.php"  method='post'>
             <div class='formBox'>
-
-              <p class='answer'> <?=$view?></p>
-
-             </div>            
+                <input type="text" name="name" placeholder='Name' class='formNav in' value="<?=$row["name"]?>">
+                <input type="text" name="email"  Placeholder='Email' class='formNav in' value="<?=$row["email"]?>">
+                <textarea name="message" id="" rows="10" placeholder='Message' class='formNav'><?=$row["message"]?></textarea>
+                <input type="hidden" name='id' value="<?=$row["id"]?>">
+                <input type="submit" value='Send Message'class='sub'>
+             </div> 
             </form>
-     
           </div>
       </div>
    </div>
+
+
 
 
 

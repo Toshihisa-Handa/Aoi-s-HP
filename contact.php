@@ -1,7 +1,9 @@
+<?php 
+session_start();
+include('funcs.php');
+loginCheck();
 
-
-
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,16 +30,13 @@ include('header.php');
   <div class="form-wrapper">
       <div class="container">
           <div class="form-area">
-            <form action="contactW.php"  method='post'>
+            <form action="contactInsert.php"  method='post'>
             <div class='formBox'>
                 <input type="text" name="name" placeholder='Name' class='formNav in'>
-                <input type="text" name="mail"  Placeholder='Email' class='formNav in'>
+                <input type="text" name="email"  Placeholder='Email' class='formNav in'>
                 <textarea name="message" id="" rows="10" placeholder='Message' class='formNav'></textarea>
                 <input type="submit" value='Send Message'class='sub'>
-             </div>
-            
-            
-            
+             </div> 
             </form>
           </div>
       </div>

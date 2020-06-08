@@ -1,6 +1,6 @@
 /* ーーーーーーーーーーーー共通ーーーーーーーーーー */
 
-img{
+.tama{
   height: 400px;
   width: 100%;
 }
@@ -53,6 +53,8 @@ textarea{
   width: 750px;
   height: 500px;
   margin: 0 auto;
+  overflow: scroll;
+
 }
 
 .formBox{
@@ -88,4 +90,16 @@ h2{
 .formR{
   height: 900px;
   overflow: scroll;
+}
+
+.contactBox{
+  background-color: rgb(142, 231, 230);
+  border-radius: 10px;
+  padding:10px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.contactLink{
+  color:rgb(16, 30, 72);
 }
